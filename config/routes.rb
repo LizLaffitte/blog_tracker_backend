@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   post "/login", to: "sessions#create"
   post "/logout", to: "sessions#destroy"
+  post "/signup", to: "api/v1/users#create"
 
   namespace :api do
     namespace :v1 do
