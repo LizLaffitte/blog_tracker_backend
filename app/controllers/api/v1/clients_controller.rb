@@ -1,4 +1,4 @@
-class ClientsController < ApplicationController
+class Api::V1::ClientsController < ApplicationController
     before_action :find_client, only: [:show, :update, :destroy]
     def create
         client = current_user.clients.build(client_params)

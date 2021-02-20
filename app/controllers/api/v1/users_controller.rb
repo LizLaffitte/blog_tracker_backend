@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
     wrap_parameters :user, include: [:username, :email, :password, :at_key]
     before_action :find_user, only: [:show, :destroy, :update]
     def create
@@ -28,7 +28,6 @@ class UsersController < ApplicationController
     def destroy
         @user.destroy
         render json: {message: "User deleted."}
-
     end
 
     private
