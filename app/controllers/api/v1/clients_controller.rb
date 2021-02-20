@@ -28,7 +28,7 @@ class Api::V1::ClientsController < ApplicationController
 
     def destroy
         @client.destroy
-        render json: {message: "Client deleted."}
+        render json: {notice: "Client deleted."}
     end
 
     private
