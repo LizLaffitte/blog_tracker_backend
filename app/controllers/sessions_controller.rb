@@ -1,11 +1,10 @@
+require 'pry'
 class SessionsController < ApplicationController
-    before_action :find_user, only: [:create]
+    before_action :authenticate_user
     def create
-        if @user && @user.authenticate(params[:session][:password])
-            login(@user.id)
-            render json: UserSerializer.new(@user)
-        elsif @user
-            render json: {errors: "Incorrect credentials"}
+        if current_user && current_user.authenticate(params[:session][:password])
+            login(current_user.id)
+            render json: UserSerializer.new(current_user)
         else
             render json: {errors: "User does not exist"}
         end
@@ -18,9 +17,6 @@ class SessionsController < ApplicationController
     end
 
     private
-    def find_user
-        @user = User.find_by(username: params[:session][:username])
-    end
 
     def login(id)
         session[:user_id] = id
